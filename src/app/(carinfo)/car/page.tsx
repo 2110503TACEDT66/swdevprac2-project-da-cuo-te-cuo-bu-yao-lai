@@ -4,9 +4,10 @@ import { Suspense } from "react"
 import { LinearProgress } from "@mui/material"
 import CarPanel from "@/components/CarPanel"
 import { CarItem, CarJson } from "interfaces"
+import getRestaurants from "@/libs/getRestaurant"
 
 export default async function Car() {
-    const cars: CarJson = getCars()
+    const restaurants: CarJson = getRestaurants()
     return (
         <main className="text-center p-5">
             <h1 className="text-xl font-medium">Select Your Travel Partner</h1>
