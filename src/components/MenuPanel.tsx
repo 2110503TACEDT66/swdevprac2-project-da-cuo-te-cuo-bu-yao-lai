@@ -1,6 +1,6 @@
 import Productcard from "./ProductCard"
 import Link from "next/link"
-import { MenuItem, MenuJson } from "interfaces"
+import { MenuItem,ResJson } from "interfaces"
 
 export default async function MenuPanel({ menuJson }: { menuJson: MenuJson }) {
     const menuJsonReady = await menuJson
