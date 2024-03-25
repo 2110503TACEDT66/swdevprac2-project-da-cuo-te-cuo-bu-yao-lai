@@ -3,17 +3,17 @@ import { useEffect, useReducer, useState } from "react"
 import Productcard from "./ProductCard"
 import Link from "next/link"
 import { useRef } from "react"
-import getCars from "@/libs/getCars"
+import getRestaurants from "@/libs/getRestaurants"
 import { CarItem, CarJson } from "interfaces"
 
 
 export default function CarPanel() {
 
-    const [carResponse, setCarResponse] = useState<CarJson|null>(null)
+    const [carResponse, setCarResponse] = useState<CarJson | null>(null)
 
     useEffect(() => {
         const fetchData = async () => {
-            const cars = await getCars()
+            const cars = await getRestaurants()
             setCarResponse(cars)
         }
         fetchData()

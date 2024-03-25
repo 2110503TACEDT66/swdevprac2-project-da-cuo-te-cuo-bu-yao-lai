@@ -1,15 +1,20 @@
 import Image from "next/image"
 import getRestaurant from "@/libs/getRestaurant"
 import { Link } from "@mui/material"
+import MenuPanel from "@/components/MenuPanel"
+import getMenu from "@/libs/getMenu"
+import { MenuJson } from "interfaces"
 export default async function RestaurantDetailPage({ params }: { params: { cid: string } }) {
 
     const restaurantDetail = await getRestaurant(params.cid)
+    const menus: MenuJson = await getMenu(params.cid)
+    //api get menu
     return (
         <main className="text-center p-5">
             <h1 className="text-lg font-medium">Car ID {restaurantDetail.data.model}</h1>
             <div className="flex flex-row my-5">
                 <Image src={restaurantDetail.data.picture}
-                    alt='Car Image'
+                    alt='Restaurant Image'
                     width={0} height={0} sizes="100vw"
                     className="rounded-lg w-[30%]" />
                 <div className="text-md mx-5 text-left">
@@ -23,7 +28,7 @@ export default async function RestaurantDetailPage({ params }: { params: { cid: 
                     <div className="text-md mx-5">region: {restaurantDetail.data.region} </div>
                     <div className="text-md mx-5">openCloseTime: {restaurantDetail.data.openCloseTime} </div>
 
-                    <Link href={`/reservations?id=${params.cid}&model=${restaurantDetail.data.name}`}>
+                    <Link href={`/reservations?id=${params.cid}&restaurant=${restaurantDetail.data.name}`}>
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
         	text-white shadow-sm">
                             Make Reservaion
@@ -31,7 +36,7 @@ export default async function RestaurantDetailPage({ params }: { params: { cid: 
                     </Link>
 
                 </div>
-                {/* <MenuPanel menuJson={restaurants}/> */}
+                <MenuPanel RestaurantJson={menus} />
             </div>
         </main >
     )

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 
 export default function Banner() {
-    const covers = ['/img/cover.jpg', '/img/cover2.jpg', '/img/cover3.jpg']
+    const covers = ['/img/cover.jpg']
     const [index, setindex] = useState(0)
     const router = useRouter()
 
@@ -14,11 +14,11 @@ export default function Banner() {
     console.log(session?.user.token)
 
     return (
-        <div className={styles.banner} onClick={() => { setindex(index + 1) }}>
-            <Image src={"covers[index % 3]"} alt='cover' fill={true} priority className='object-cover' />
-            <div className={styles.bannerText}>
-                <h1 className='text-3xl font-medium'>Your travel partner</h1>
-                <h3 className='text-xl font-serif'>Explore Your World with Us</h3>
+        <div className={styles.banner}>
+            <Image src='/img/cover.jpg' alt='cover' fill={true} priority className='object-cover' />
+            <div>
+                <h1 className='text-5xl font-bold text-white relative top-[200px] z-20 text-center custom-text-shadow'>Seoul Delights</h1>
+                <h3 className='text-3xl font-serif text-white z-20 relative text-center top-[200px] custom-text-shadow'>Experience the Taste of Seoul: Where Delights Await!</h3>
             </div>
             {
                 session ? <div className='z-30 absolute top-5 right-10 font-semibold text-cyan-800 text-xl'> Hello {session.user?.name}</div> : null

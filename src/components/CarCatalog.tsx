@@ -1,18 +1,18 @@
 import Productcard from "./ProductCard"
 import Link from "next/link"
-import { CarItem, CarJson } from "interfaces"
+import { RestaurantItem, RestaurantJson } from "interfaces"
 
-export default async function CarCatalog({ carJson }: { carJson: CarJson }) {
-    const carJsonReady = await carJson
+export default async function RestaurantCatalog({ restaurantJson }: { restaurantJson: RestaurantJson }) {
+    const restaurantJsonReady = await restaurantJson
     return (
         <>
-            Explore {carJsonReady.count} models in our catalog
+            Explore {restaurantJsonReady.count} models in our catalog
             <div style={{ margin: "20px", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around", alignContent: "space-around" }}>
                 {
-                    carJsonReady.data.map((carItem: CarItem) => (
-                        <Link href={`/car/${carItem.id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%]
+                    restaurantJsonReady.data.map((restaurantItem: RestaurantItem) => (
+                        <Link href={`/car/${restaurantItem.name}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%]
                         p-2 sm:p-4 md:p-4 lg:pd-8">
-                            <Productcard carName={carItem.model} imgSrc={carItem.picture} />
+                            <Productcard restaurantName={restaurantItem.name} imgSrc={restaurantItem.picture} />
                         </Link>
                     ))
                 }

@@ -1,7 +1,7 @@
-export default async function getRestaurant(id: string) {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/restaurants/${id}`)
+export default async function getMenu(id: string) {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/restaurants/${id}/menus`)
     if (!response.ok) {
-        throw new Error("Failed to fetch Restaurant")
+        throw new Error("Failed to fetch Menu")
     }
 
     return await response.json()
