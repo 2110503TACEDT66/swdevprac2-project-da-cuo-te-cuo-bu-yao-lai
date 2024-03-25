@@ -4,11 +4,14 @@ import { Link } from "@mui/material"
 import MenuPanel from "@/components/MenuPanel"
 import getMenu from "@/libs/getMenu"
 import { MenuJson } from "interfaces"
-export default async function RestaurantDetailPage({ params }: { params: { cid: string } }) {
 
+export default async function RestaurantDetailPage({ params }: { params: { cid: string } }) {
+    // Fetch restaurant details
     const restaurantDetail = await getRestaurant(params.cid)
+
+    // Fetch menu
     const menus: MenuJson = await getMenu(params.cid)
-    //api get menu
+
     return (
         <main className="text-center p-5">
             <h1 className="text-lg font-medium">Car ID {restaurantDetail.data.model}</h1>
@@ -36,12 +39,12 @@ export default async function RestaurantDetailPage({ params }: { params: { cid: 
                     </Link>
 
                 </div>
-                <MenuPanel RestaurantJson={menus} />
+                <MenuPanel menuJson={menus} /> {/* Pass menus as menuJson prop */}
             </div>
         </main >
     )
 }
 
-export async function generateStaticParams() {
-    return [{ cid: '001' }, { cid: '002' }, { cid: '003' }, { cid: '004' }]
-}
+// export async function generateStaticParams() {
+//     return [{ cid: '001' }, { cid: '002' }, { cid: '003' }, { cid: '004' }]
+// }
