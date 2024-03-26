@@ -6,6 +6,7 @@ export interface ReservationItem {
 }
 
 export interface RestaurantItem {
+    _id: string
     name: string
     address: string
     district: string
@@ -15,6 +16,8 @@ export interface RestaurantItem {
     region: string
     openCloseTime: string
     picture: string
+    reservation : Array<object>
+    id:string
 }
 
 
@@ -27,7 +30,9 @@ export interface MenuItem {
 
 
 export interface RestaurantJson {
-    count: number
+    success: boolean,
+    count: number,
+    pagination: Object,
     data: RestaurantItem[]
 }
 
@@ -35,5 +40,5 @@ export interface RestaurantJson {
 export interface MenuJson {
     name: string
     food: MenuItem[]
-    restaurant: object
+    restaurant: string
 }

@@ -4,17 +4,28 @@ import { Link } from "@mui/material"
 import MenuPanel from "@/components/MenuPanel"
 import getMenu from "@/libs/getMenu"
 import { MenuJson } from "interfaces"
+import { getSession } from "next-auth/react"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { getServerSession } from "next-auth"
+import getUserProfile from "@/libs/getUserProfile"
 
 export default async function RestaurantDetailPage({ params }: { params: { cid: string } }) {
     // Fetch restaurant details
     const restaurantDetail = await getRestaurant(params.cid)
 
+    const session = await getServerSession(authOptions)
+    if (!session || !session.user.token) return null
+
+    const profile = await getUserProfile(session.user.token)
+    console.log(session.user.token)
+
     // Fetch menu
-    const menus: MenuJson = await getMenu(params.cid)
+    const menus = await getMenu(params.cid)
+    console.log(menus);
 
     return (
         <main className="text-center p-5">
-            <h1 className="text-lg font-medium">Car ID {restaurantDetail.data.model}</h1>
+            <h1 className="text-lg font-medium">{restaurantDetail.data.name}</h1>
             <div className="flex flex-row my-5">
                 <Image src={restaurantDetail.data.picture}
                     alt='Restaurant Image'
@@ -22,29 +33,19 @@ export default async function RestaurantDetailPage({ params }: { params: { cid: 
                     className="rounded-lg w-[30%]" />
                 <div className="text-md mx-5 text-left">
                     {restaurantDetail.data.description}
-                    <div className="text-md mx-5">์Name: {restaurantDetail.data.name} </div>
-                    <div className="text-md mx-5">Address: {restaurantDetail.data.address} </div>
-                    <div className="text-md mx-5">District: {restaurantDetail.data.district} </div>
-                    <div className="text-md mx-5">Province: {restaurantDetail.data.province} </div>
-                    <div className="text-md mx-5">Postalcode: {restaurantDetail.data.postalcode} </div>
-                    <div className="text-md mx-5">tel: {restaurantDetail.data.tel} </div>
+                    <div className="text-md mx-5">Address: {restaurantDetail.data.address} {restaurantDetail.data.district} {restaurantDetail.data.province} {restaurantDetail.data.postalcode}</div>
                     <div className="text-md mx-5">region: {restaurantDetail.data.region} </div>
                     <div className="text-md mx-5">openCloseTime: {restaurantDetail.data.openCloseTime} </div>
 
-                    <Link href={`/reservations?id=${params.cid}&restaurant=${restaurantDetail.data.name}`}>
-                        <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2
-        	text-white shadow-sm">
+                    <Link href={`/reservations?id=${session.user._id}&restaurant=${restaurantDetail.data.id}`}>
+                        <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm">
                             Make Reservaion
                         </button>
                     </Link>
 
                 </div>
-                <MenuPanel menuJson={menus} /> {/* Pass menus as menuJson prop */}
+                {/* <MenuPanel menuJson={menus} /> Pass menus as menuJson prop */}
             </div>
         </main >
     )
 }
-
-// export async function generateStaticParams() {
-//     return [{ cid: '001' }, { cid: '002' }, { cid: '003' }, { cid: '004' }]
-// }

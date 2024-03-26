@@ -12,6 +12,7 @@ export default function Banner() {
 
     const { data: session } = useSession()
     console.log(session?.user.token)
+    console.log(session?.user.email)
 
     return (
         <div className={styles.banner}>
@@ -27,7 +28,7 @@ export default function Banner() {
             font-semibold py-2 px-2 m-2 rounded z-30 absolute bottom-0 right-0 
             hover:bg-cyan-600 hover:text-white hover:border-transparent'
                 onClick={(e) => { e.stopPropagation(); router.push('/car') }}>
-                Select Your Travel Partner NOW</button>
+                Select Your Restaurant</button>
         </div>
     )
 }

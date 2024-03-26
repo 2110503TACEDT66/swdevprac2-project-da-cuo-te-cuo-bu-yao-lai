@@ -16,7 +16,7 @@ import { MenuJson } from "../../../interfaces";
 
 export default function Reservations() {
   const urlParams = useSearchParams();
-  const cid = urlParams.get("id");
+  const userid = urlParams.get("id");
   const restaurant = urlParams.get("restaurant");
 
   const { data: session } = useSession();
@@ -28,22 +28,22 @@ export default function Reservations() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (cid) {
-        const fetchedMenu = await getMenu(cid);
+      if (userid) {
+        const fetchedMenu = await getMenu(userid);
         if (fetchedMenu) {
           setMenu(fetchedMenu);
         }
       }
     };
     fetchData();
-  }, [cid]);
+  }, [userid]);
 
   const makeReservation = () => {
     if (revDate && name && restaurant) {
       const item: ReservationItem = {
         revDate: dayjs(revDate).format("YYYY/MM/DD"),
         user: name,
-        restaurant: cid ?? "",
+        restaurant: restaurant,
         createdAt: new Date().toISOString(),
       };
       dispatch(addReservation(item));
