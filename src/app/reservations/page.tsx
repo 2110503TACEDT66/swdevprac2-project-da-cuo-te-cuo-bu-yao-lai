@@ -5,7 +5,7 @@ import { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { ReservationItem } from "../../../interfaces";
+import { ReservationItem2 } from "../../../interfaces";
 import { addReservation } from "@/redux/features/cartSlice";
 import MenuPanel from "@/components/MenuPanel";
 import { useSession } from "next-auth/react";
@@ -40,7 +40,7 @@ export default function Reservations() {
 
   const makeReservation = () => {
     if (revDate && name && restaurant) {
-      const item: ReservationItem = {
+      const item: ReservationItem2 = {
         revDate: dayjs(revDate).format("YYYY/MM/DD"),
         user: name,
         restaurant: restaurant,
@@ -75,9 +75,7 @@ export default function Reservations() {
       >
         Reserve this Car
       </button>
-      {
-        menu?<MenuPanel menuJson={menu} />:null
-      }
+      
     </main>
   );
 }

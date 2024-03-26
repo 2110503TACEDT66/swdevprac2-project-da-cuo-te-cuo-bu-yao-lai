@@ -13,15 +13,10 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addReservation: (state, action: PayloadAction<ReservationItem>) => {
-            state.restaurantItems.push(action.payload)
+          //POST api
         },
         removeReservation: (state, action: PayloadAction<ReservationItem>) => {
-            const remainItems = state.restaurantItems.filter(obj => {
-                return ((obj.createdAt !== action.payload.createdAt)
-                    || (obj.user !== action.payload.user)
-                    || (obj.revDate !== action.payload.revDate))
-            })
-            state.restaurantItems = remainItems
+            //DELETE API
         }
     }
 })
