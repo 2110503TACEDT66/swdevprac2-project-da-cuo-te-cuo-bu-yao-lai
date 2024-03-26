@@ -1,4 +1,5 @@
 export interface ReservationItem {
+    _id: string
     revDate: string
     user: string
     restaurant: string
