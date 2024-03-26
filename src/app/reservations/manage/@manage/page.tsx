@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/libs/auth"
 import getReservations from "@/libs/getReservations"
 import { ReservationItem } from "interfaces"
 import { Button } from "@mui/material"
