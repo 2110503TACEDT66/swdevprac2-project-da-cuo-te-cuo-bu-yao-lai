@@ -1,15 +1,11 @@
 export interface ReservationItem {
-  _id: string;
+  _id?: string;
   revDate: string;
   user: string;
-  restaurant: string;
+  restaurant?: RestaurantItem;
   createdAt: string;
-}
-export interface ReservationItem2 {
-  revDate: string;
-  user: string;
-  restaurant: string;
-  createdAt: string;
+  token?:string;
+  restaurantId? : string
 }
 
 export interface RestaurantItem {
@@ -56,3 +52,9 @@ export interface FoodItem {
   img: string
 }
 
+export interface ReservationJson {
+  success: boolean;
+  count: number;
+  pagination: Object;
+  data: ReservationItem[];
+}
