@@ -1,5 +1,5 @@
 import getRestaurants from "@/libs/getRestaurants"
-import CarCatalog from "@/components/CarCatalog"
+import CarCatalog from "@/components/RestaurantCatalog"
 import { Suspense } from "react"
 import { LinearProgress } from "@mui/material"
 import { RestaurantItem, RestaurantJson } from "interfaces"

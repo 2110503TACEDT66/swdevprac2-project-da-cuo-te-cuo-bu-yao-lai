@@ -12,7 +12,7 @@ export default async function RestaurantCatalog({ restaurantJson }: { restaurant
             <div style={{ margin: "20px", display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around", alignContent: "space-around" }}>
                 {
                     restaurantJsonReady.data.map((restaurantItem: RestaurantItem) => (
-                        <Link href={`/car/${restaurantItem.id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%]
+                        <Link href={`/restaurant/${restaurantItem.id}`} className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%]
                         p-2 sm:p-4 md:p-4 lg:pd-8">
                             <Productcard restaurantName={restaurantItem.name} imgSrc={restaurantItem.picture} />
                         </Link>

@@ -39,7 +39,7 @@ export default async function RestaurantDetailPage({ params }: { params: { cid: 
 
                     <Link href={`/reservations?id=${session.user._id}&restaurant=${restaurantDetail.data.id}&restaurantName=${restaurantDetail.data.name}&picture=${restaurantDetail.data.picture}`}>
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 text-white shadow-sm">
-                            Make Reservaion
+                            Make Reservation
                         </button>
                     </Link>
 
