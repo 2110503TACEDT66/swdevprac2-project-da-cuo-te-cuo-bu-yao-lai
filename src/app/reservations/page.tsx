@@ -13,30 +13,21 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect } from "react";
 import getMenu from "@/libs/getMenu";
 import { MenuJson } from "../../../interfaces";
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+import Image from "next/image"
 
 export default function Reservations() {
   const urlParams = useSearchParams();
   const userid = urlParams.get("id");
   const restaurant = urlParams.get("restaurant");
+  const restaurantName = urlParams.get("restaurantName");
+  const picture = urlParams.get("picture");
 
   const { data: session } = useSession();
   const name = session?.user.name;
 
   const dispatch = useDispatch<AppDispatch>();
-
-  const [menu, setMenu] = useState<MenuJson | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (userid) {
-        const fetchedMenu = await getMenu(userid);
-        if (fetchedMenu) {
-          setMenu(fetchedMenu);
-        }
-      }
-    };
-    fetchData();
-  }, [userid]);
 
   const makeReservation = () => {
     if (revDate && name && restaurant) {
@@ -55,17 +46,23 @@ export default function Reservations() {
   return (
     <main className="w-[100%] flex flex-col items-center space-y-4">
       <div className="text-xl font-medium">New Reservation</div>
-      <div className="text-xl font-medium">{restaurant}</div>
+      <div className="text-xl font-medium">{restaurantName}</div>
+      <Image src={picture + ''}
+        alt='Restaurant Image'
+        width={0} height={0} sizes="100vw"
+        className="rounded-lg w-[30%]" />
 
       <div className="w-fit space-y-2">
         <div className="text-md text-left text-gray-600">Pick-up Date </div>
-        <DatePicker
-          className="bg-white"
-          value={revDate}
-          onChange={(value) => {
-            setRevDate(value);
-          }}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            className="bg-white"
+            value={revDate}
+            onChange={(value) => {
+              setRevDate(value);
+            }}
+          />
+        </LocalizationProvider>
       </div>
 
       <button
@@ -75,7 +72,7 @@ export default function Reservations() {
       >
         Reserve this Car
       </button>
-      
+
     </main>
   );
 }

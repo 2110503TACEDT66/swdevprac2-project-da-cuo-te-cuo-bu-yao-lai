@@ -40,7 +40,19 @@ export interface RestaurantJson {
 }
 
 export interface MenuJson {
-  name: string;
-  food: MenuItem[];
-  restaurant: string;
+  sucess: boolean
+  count: number
+  data: MenuItem[]
 }
+
+export interface MenuItem {
+  _id: string
+  name: string
+  food: Array<FoodItem>
+}
+
+export interface FoodItem {
+  name: string
+  img: string
+}
+
