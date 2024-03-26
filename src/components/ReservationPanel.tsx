@@ -1,6 +1,7 @@
 import Productcard from "./ProductCard"
 import Link from "next/link"
 import { ReservationItem, ReservationJson } from "interfaces"
+import dayjs from "dayjs"
 
 export default async function ReservationPanel({ ReservationJSON }: { ReservationJSON: ReservationJson }) {
     const reservationJsonReady = await ReservationJSON
@@ -26,7 +27,7 @@ export default async function ReservationPanel({ ReservationJSON }: { Reservatio
                             const hours = reservationDate.getHours();
                             const minutes = reservationDate.getMinutes();
                             const ampm = hours >= 12 ? 'PM' : 'AM';
-                            const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+                            const formattedTime = dayjs(reservationDate).format("h:mm A")
                             return (ReservationItem.restaurant ?
                                 <tr className="bg-slate-200" key={ReservationItem._id}>
                                     <td className="border border-gray-400 px-5 py-2">{ReservationItem.restaurant.name}</td>
