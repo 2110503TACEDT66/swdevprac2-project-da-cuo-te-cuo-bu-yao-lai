@@ -111,7 +111,7 @@ const updateReservation = () => {
             text-white shadow-sm"
         onClick={updateReservation}
       >
-        Reserve this Car
+        Reserve Now
       </button>
     </main>
   );

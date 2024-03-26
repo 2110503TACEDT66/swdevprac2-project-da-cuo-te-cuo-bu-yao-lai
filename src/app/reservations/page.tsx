@@ -71,7 +71,7 @@ export default function Reservations() {
             text-white shadow-sm"
         onClick={makeReservation}
       >
-        Reserve this Car
+        Reserve Now
       </button>
 
     </main>
