@@ -5,7 +5,7 @@ import MenuPanel from "@/components/MenuPanel"
 import getMenu from "@/libs/getMenu"
 import { MenuJson } from "interfaces"
 import { getSession } from "next-auth/react"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/libs/auth"
 import { getServerSession } from "next-auth"
 import getUserProfile from "@/libs/getUserProfile"
 
